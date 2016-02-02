@@ -7,14 +7,16 @@
 #                                                           #
 # Antonios Kyparissiadis                                    #
 #                                                           #
+# antonios.kyparissiadis@nottingham.ac.uk                   #
+# kyparissiadis@gmail.com                                   #
+#                                                           #
 # School of Psychology, University of Nottingham            #
 #                                                           #
-# Version 1.0                                               # 
+# Version 1.0                                               #  
 # January, 2016                                             #
 #                                                           #
 #############################################################
 #############################################################
-
 
 import re
 import phonConsRules
@@ -37,9 +39,10 @@ def checkAllConsonants(phones):
 
 def fixClusters(parsed):
     ''' (string) -> string
+
     The input is a rough approximation of syllabification as all consonants/consonant clusters are assigned to the beginning of each syllable.
     This function fixes any clusters that need to be split by determining the part of the cluster that needs to go the previous syllable's coda.
-'''
+    '''
     index = -1
     for char in parsed:
         index += 1 #start of syllable     #next is consonant        #second next is consonant   
@@ -60,11 +63,11 @@ def fixClusters(parsed):
             parsed = ''.join(parsed)
     return(parsed)
                     
-
 def parser(phones):
     '''(string) -> string
+
     Parses Greek phonetic input into its constituent syllables. 
-'''
+    '''
     index = -1
     checkSymbols(phones)
     if checkAllConsonants(phones):
@@ -80,35 +83,25 @@ def parser(phones):
         syllables[len(syllables)-1] = syllables[len(syllables)-1] + thisSyllable        
     parsed = '-'.join(syllables)
     return(fixClusters(parsed))
-    
-
-    
+        
 def syllabifyLexicon(filename):
     '''(filename) - > file (phonSyllables.txt)
         
-
     Syllabifies a database and adds two new columns, the syllables of each word and their number.
     The input file needs to have the words at the first column. The program will ignore anything else.
-    Assumes headers on the first line
-    
+    Assumes headers on the first line.    
     '''
     lexicon = []
     with open(filename, 'r') as file: 
         for line in file.readlines()[1:]:
-            lexicon.append(re.split(r'\t',line.rstrip())[0])
-            
+            lexicon.append(re.split(r'\t',line.rstrip())[0])            
     overall_list = [] 
-
     for word in lexicon:
         list_of_syllables = parser(word).split('-')
-        overall_list.append(list_of_syllables)
-
-   
+        overall_list.append(list_of_syllables)   
     with open('phonSyllables.txt', 'w') as f:
         f.write( 'Word	syll	syll num' + '\r\n')
-
-        for item in range(0, len(lexicon)):
-            
+        for item in range(0, len(lexicon)):            
             length = len(overall_list[item])
             syllables = '-'.join(overall_list[item])
             f.write(lexicon[item] + '\t' + syllables + '\t' + str(length) + '\n')

@@ -7,6 +7,9 @@
 #                                                           #
 # Antonios Kyparissiadis                                    #
 #                                                           #
+# antonios.kyparissiadis@nottingham.ac.uk                   #
+# kyparissiadis@gmail.com                                   #
+#                                                           #
 # School of Psychology, University of Nottingham            #
 #                                                           #
 # Version 1.0                                               # 
@@ -15,21 +18,14 @@
 #############################################################
 #############################################################
 
-
-
 import re
 import GPCrules
-
-
 
 consistentGPCs = {'β': 'v', 'δ': 'D', 'ζ': 'z', 'θ': 'T', 
                    'ξ': 'ks', 'ρ': 'r','φ': 'f', 'ψ': 'ps', 'ς': 's', 'ω': 'o',
                   'ώ': 'ό', 'η': 'i', 'ή': 'ί', 'ά': 'ά', 'έ': 'έ', 'ό': 'ό', 'ϊ': 'i', 'ΐ': 'ί', 'ΰ': 'ί', 'ϋ': 'i'}
-
 consistentLetters = ['β','δ','ζ','θ','ξ','ρ','φ', 'ψ', 'ς', 'η', 'ή', 'ω', 'ώ', 'ά', 'έ','ό', 'ϊ', 'ΐ', 'ϋ', 'ΰ']
-
 phonVowels = ['ά', 'ί', 'ό', 'έ', 'ύ', 'a', 'e', 'i', 'u', 'o']
-
 dubiousLetters = {'γ': GPCrules.gamma, 'κ': GPCrules.kappa, 'λ': GPCrules.lamda, 'μ': GPCrules.mi, 'ν': GPCrules.ni, 'π': GPCrules.pi,
                   'σ': GPCrules.sigma, 'τ': GPCrules.tau, 'χ': GPCrules.chi, 'α': GPCrules.alpha, 
                   'ι': GPCrules.jota, 'ί': GPCrules.jotaS, 'ε' : GPCrules.epsilon, 'υ': GPCrules.ypsilon,
@@ -48,10 +44,9 @@ def stripDoubles(phones = ""):
         output = output + phones[counter]
     return output
 
-
 def convert(orthForm = '', syllables = "", syllabified = False):
     ''' 'πάλι', 'πά-λι' -> pάli (boolean True -> pά-li)
-'''
+    '''
     phones = ""
     index = 0
     for letter in syllables:
@@ -63,12 +58,10 @@ def convert(orthForm = '', syllables = "", syllabified = False):
             phones = phones + dubiousLetters[letter](index, orthForm, syllables)
         index += 1
     phones = stripDoubles(phones)
-
     if syllabified:
         return phones
     else:
-        return phones.replace('-', '')
-    
+        return phones.replace('-', '')  
 
 def convertLexicon(filename):
     '''(filename) -> file (GPCconverted.txt)
@@ -81,24 +74,18 @@ def convertLexicon(filename):
     parsed with hyphens('-') in-between syllables on the second column. The program will ignore anything else.
     Assumes headers on the first line.
 
-    Note that the syllabified output will entail the orthographic syllables, not the phonological ones
-'''
-
+    Note that the syllabified output will entail the orthographic syllables, not the phonological ones.
+    '''
     lexicon = []
     with open(filename, 'r') as f:
             for line in f.readlines()[1:]:
-                lexicon.append(re.split(r'\t',line.rstrip())[:2])
-    
-    
+                lexicon.append(re.split(r'\t',line.rstrip())[:2]) 
     for entry in lexicon:
         entry.append(convert(entry[0], entry[1]))
-        entry.append(convert(entry[0], entry[1], syllabified = True))
-       
-
+        entry.append(convert(entry[0], entry[1], syllabified = True))       
     with open('GPCconverted.txt', 'w') as f:
         f.write( 'Word	syll	phones	phonSyl' + '\r\n')
         for entry in lexicon:
             for item in entry:
                 f.write(item + '\t')
             f.write('\n')
-        

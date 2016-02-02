@@ -7,6 +7,9 @@
 #                                                           #
 # Antonios Kyparissiadis                                    #
 #                                                           #
+# antonios.kyparissiadis@nottingham.ac.uk                   #
+# kyparissiadis@gmail.com                                   #
+#                                                           #
 # School of Psychology, University of Nottingham            #
 #                                                           #
 # Version 1.0                                               # 
@@ -15,13 +18,10 @@
 #############################################################
 #############################################################
 
-
-
 pallatisingVowels = ['ε', 'έ', 'ι', 'ί', 'η', 'ή', 'υ', 'ύ']
 pallatisingDiphthongs = ['αι', 'αί', 'οι', 'οί']
 vowels = ['α', 'ά', 'ι', 'ί', 'ε', 'έ', 'ε', 'ω', 'ώ', 'ο', 'ό', 'η', 'ή']
 consonants = 'βγδζθκλμνξπρσςτφχψ'
-
 
 def trueIndex(index, syllabified):
     counter = 0
@@ -60,8 +60,7 @@ def kappa(index, word, syllabified):
     else:
         return 'k'
 
-def lamda(index, word, syllabified):
-                                                            #not end of word
+def lamda(index, word, syllabified):                        
     if index < len(syllabified)-2 and word[trueIndex(index, syllabified)+1] == 'ι' and  syllabified[index+2] in 'άαεέοόωώ':
         return 'L'
     elif index < len(syllabified)-3 and word[trueIndex(index, syllabified)+1] in 'οε' and word[trueIndex(index, syllabified)+2] == 'ι' and syllabified[index+3] in 'άαεέοόωώ':
@@ -78,7 +77,6 @@ def mi(index, word, syllabified):
 ##        return 'M'
     else:
         return 'm'
-    
 
 def ni(index, word, syllabified):
     if index < len(syllabified)-1 and (word[trueIndex(index, syllabified)+1] == 'τ' or word[trueIndex(index, syllabified)+1] == 'ν'):
@@ -115,7 +113,6 @@ def chi(index, word, syllabified):
         return 'X'
     else:
         return 'x'
-
 
 def alpha(index, word, syllabified):
     if index < len(syllabified)-1 and word[trueIndex(index, syllabified)+1] == 'ι':
@@ -155,16 +152,13 @@ def jota(index, word, syllabified):
         return ""
     else:
         return 'i'  
-        
-    
-    
+            
 def jotaS(index, word, syllabified):
     if index!= 0 and word[trueIndex(index, syllabified)-1] in ['ο', 'α', 'ε']:
         return ""
     else:
         return 'ί'
     
-
 def epsilon(index, word, syllabified):
     if index < len(syllabified)-1 and word[trueIndex(index, syllabified)+1] == 'ι':
         if (index != 0 and word[trueIndex(index, syllabified)-1] in 'πστθφξψδλγνμχ') and (index < len(syllabified)-2 and not syllabified[index+2]=='-'):
@@ -178,7 +172,6 @@ def epsilon(index, word, syllabified):
     else:
         return 'e'
         
-
 def ypsilon(index, word, syllabified):
     if index < len(syllabified)-1 and word[trueIndex(index, syllabified)+1] in 'β' and (index != 0 and not word[trueIndex(index, syllabified)-1] in consonants):
         return ''
@@ -213,8 +206,6 @@ def ypsilonS(index, word, syllabified):
     else:
         return 'ί'
     
-  
-
 def omikron(index, word, syllabified):
     if index < len(syllabified)-1 and word[trueIndex(index, syllabified)+1] == 'ι':
         if (index != 0 and word[trueIndex(index, syllabified)-1] in 'πστθφξψδλγνμχ') and (index < len(syllabified)-2 and not syllabified[index+2]=='-'):
@@ -230,5 +221,3 @@ def omikron(index, word, syllabified):
     else:
         return 'o'
     
-    
-
