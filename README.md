@@ -115,7 +115,7 @@ eksostrefίs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e-kso-stre-fίs&nbsp;&nbsp;&nbsp
 <br><br>
 *If you use these scripts, please cite by using this reference.*
 
-Kyparissiadis, A., van Heuven, W.J.B., Pitchford, N.J., & Ledgeway, T. (submitted). *GreekLex 2: A comprehensive upgrade of the GreekLex database with syllabic, phonological and part-of-speech information.*
+Kyparissiadis, A., van Heuven, W.J.B., Pitchford, N.J., & Ledgeway, T. (submitted). *GreekLex 2: A comprehensive database with syllabic, phonological and part-of-speech information.*
 
 <br><br>
 ***GreekLex*** *database is available [here](http://www.psychology.nottingham.ac.uk/GreekLex/).*
